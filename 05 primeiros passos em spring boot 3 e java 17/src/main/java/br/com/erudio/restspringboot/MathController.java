@@ -43,6 +43,25 @@ public class MathController {
         }
         return covertToDouble(numberOne) * covertToDouble(numberTwo);
     }
+
+    @RequestMapping(value="/mean/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+    public Double mean(@PathVariable("numberOne") String numberOne,
+                      @PathVariable("numberTwo") String numberTwo) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return (covertToDouble(numberOne) + covertToDouble(numberTwo)) / 2;
+    }
+
+    @RequestMapping(value="/squareRoot/{number}", method=RequestMethod.GET)
+    public Double squareRoot(@PathVariable("number") String number) throws Exception {
+        if (!isNumeric(number)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+
+        return Math.sqrt(covertToDouble(number)) ;
+    }
+
     public static Double covertToDouble(String strNumber) {
         if (strNumber == null) return 0d;
         String number = strNumber.replaceAll(",", ".");
