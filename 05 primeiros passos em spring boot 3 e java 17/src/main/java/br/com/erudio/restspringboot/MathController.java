@@ -17,6 +17,32 @@ public class MathController {
         return covertToDouble(numberOne) + covertToDouble(numberTwo);
     }
 
+    @RequestMapping(value="/subtraction/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+    public Double subtraction(@PathVariable("numberOne") String numberOne,
+                      @PathVariable("numberTwo") String numberTwo) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return covertToDouble(numberOne) - covertToDouble(numberTwo);
+    }
+
+    @RequestMapping(value="/division/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+    public Double division(@PathVariable("numberOne") String numberOne,
+                              @PathVariable("numberTwo") String numberTwo) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return covertToDouble(numberOne) / covertToDouble(numberTwo);
+    }
+
+    @RequestMapping(value="/multiplication/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+    public Double multiplication(@PathVariable("numberOne") String numberOne,
+                              @PathVariable("numberTwo") String numberTwo) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return covertToDouble(numberOne) * covertToDouble(numberTwo);
+    }
     public static Double covertToDouble(String strNumber) {
         if (strNumber == null) return 0d;
         String number = strNumber.replaceAll(",", ".");
