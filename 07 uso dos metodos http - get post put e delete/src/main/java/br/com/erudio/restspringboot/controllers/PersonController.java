@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.*;
+import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/people")
 public class PersonController {
     @Autowired
     private PersonServices service = new PersonServices();
@@ -21,7 +22,15 @@ public class PersonController {
             value="/{id}",
             method=RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable("id") String id) throws Exception {
+    public Person findById(@PathVariable("id") String id) {
         return service.findById(id);
+    }
+
+    @RequestMapping(
+            value = "/all",
+            method=RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Person> findAll() {
+        return service.findAll();
     }
 }
