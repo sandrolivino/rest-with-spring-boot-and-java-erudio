@@ -10,3 +10,5 @@
 - services: que irá conter as classes de serviços
 [] Criar a classe PersonServices: com @Service (que deriva de @Component - como todos derivam) para permitir a injeção com @Autowired
 [] Implementar a classe PersonController
+[] Implementar o método findAll (sem acesso ao BD - mock)
+[] Implementar os verbos http POST, PUT e DELETE
