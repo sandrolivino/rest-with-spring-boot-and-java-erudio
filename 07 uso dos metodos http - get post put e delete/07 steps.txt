@@ -1,0 +1,12 @@
+[] Apagar os pacotes
+- math
+- converters
+[] Renomear a Classe MathController para PersonController
+[] Apagar todos os métodos e manter apenas para servir de base
+[] Criar um novo pacote
+- model: que irá conter as futuras entidades
+[] Dentro de model, criar a classe Person
+[] Criar um novo pacote
+- services: que irá conter as classes de serviços
+[] Criar a classe PersonServices: com @Service (que deriva de @Component - como todos derivam) para permitir a injeção com @Autowired
+[] Implementar a classe PersonController
