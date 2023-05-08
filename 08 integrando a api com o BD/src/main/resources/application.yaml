@@ -1,1 +1,8 @@
 
+spring:
+  datasource:
+    dbcp2:
+      driver-class-name: com.mysql.cj.jdbc.driver
+      url: jdbc:mysql://localhost:3306/rest_with_spring_boot_erudio?useTimezone=true&serverTimezone=UTC
+      username: root
+      password: Flamengo10@

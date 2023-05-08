@@ -1,1 +1,17 @@
-[] 
+[] Configurar o docker-compose (criação do container mysql)
+[] Instalar e configura o HeidiSql
+[] Criar o banco de dados
+[] Adicionar as dependências no pom.xml
+- spring-boot-starter-data-jpa
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+- E a do mysql, que deve ser conforme abaixo:
+<dependency>
+	<groupId>com.mysql</groupId>
+	<artifactId>mysql-connector-j</artifactId>
+	<scope>runtime</scope>
+</dependency>
+

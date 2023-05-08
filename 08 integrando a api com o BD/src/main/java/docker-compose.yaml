@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  db1:
+    container_name: "postgres"
+    image: postgres:14.2-alpine
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: Flamengo10@
+    ports:
+      - "5432:5432"
+
+  db2:
+    container_name: "mysql"
+    image: mysql:5.7
+    volumes:
+      - mysql-volume:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Flamengo10@
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql-volume:
+    external: true
+  postgres-volume:
+    external: true
