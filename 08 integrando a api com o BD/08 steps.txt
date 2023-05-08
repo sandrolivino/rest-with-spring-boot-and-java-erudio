@@ -1,5 +1,5 @@
 [] Configurar o docker-compose (criação do container mysql)
-[] Instalar e configura o HeidiSql
+[] Instalar e configurar o HeidiSql
 [] Criar o banco de dados
 [] Adicionar as dependências no pom.xml
 - spring-boot-starter-data-jpa
@@ -15,3 +15,14 @@
 	<scope>runtime</scope>
 </dependency>
 
+[] Configurar o arquivo application.yaml
+[] Implementar a classe PersonEntity e seu repositório com Hibernate e Spring Data JPA
+- Observar que a PersonRepository.java é na verdade uma Interface e não uma Classe
+[] Substituir os mocks da classe PersonService pelo acesso ao repositório
+- Ajustar as exceptions customizadas:
+-- renomear UnsupportedMathOperationException para ResourceNotFoundException (criar, no caso)
+-- renomear handleBadRequestException para handleNotFoundException
+[] Testar os endpoints
+[] Refatorar a classe PersonController (GetMapping, Put, Post, Delete...)
+- Esse parâmetro é utilizado pelo swagger e deve ficar: produces = MediaType.APPLICATION_JSON_VALUE
+- Ajustar o Delete para o retorno HTTP 204
