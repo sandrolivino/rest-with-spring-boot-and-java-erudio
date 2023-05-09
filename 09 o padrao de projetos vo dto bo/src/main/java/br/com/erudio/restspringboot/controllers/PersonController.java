@@ -1,13 +1,12 @@
 package br.com.erudio.restspringboot.controllers;
 
-import br.com.erudio.restspringboot.model.Person;
+import br.com.erudio.restspringboot.data.vo.v1.PersonVO;
 import br.com.erudio.restspringboot.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -17,23 +16,23 @@ public class PersonController {
     private PersonServices service = new PersonServices();
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable("id") Long id) {
+    public PersonVO findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Person> findAll() {
+    public List<PersonVO> findAll() {
         return service.findAll();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person create(@RequestBody Person person) {
-        return service.create(person);
+    public PersonVO create(@RequestBody PersonVO personVO) {
+        return service.create(personVO);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person update(@RequestBody Person person) {
-        return service.update(person);
+    public PersonVO update(@RequestBody PersonVO personVO) {
+        return service.update(personVO);
     }
 
     @DeleteMapping(value = "/{id}")

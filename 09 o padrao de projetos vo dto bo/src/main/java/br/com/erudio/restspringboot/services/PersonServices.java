@@ -1,15 +1,13 @@
 package br.com.erudio.restspringboot.services;
 
+import br.com.erudio.restspringboot.data.vo.v1.PersonVO;
 import br.com.erudio.restspringboot.exceptions.ResourceNotFoundException;
 import br.com.erudio.restspringboot.model.Person;
 import br.com.erudio.restspringboot.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 @Service
@@ -19,13 +17,13 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
-    public List<Person> findAll(){
+    public List<PersonVO> findAll(){
         logger.info("Finding all people...");
 
         return repository.findAll();
     }
 
-    public Person findById(Long id){
+    public PersonVO findById(Long id){
         logger.info("Finding a person...");
 
         return repository.findById(id)
@@ -35,26 +33,26 @@ public class PersonServices {
                                 "No records found for this ID!"));
     }
 
-    public Person create(Person person) {
+    public PersonVO create(PersonVO personVO) {
 
         logger.info("Creating one person!");
 
-        return repository.save(person);
+        return repository.save(personVO);
     }
 
-    public Person update(Person person) {
+    public PersonVO update(PersonVO personVO) {
 
         logger.info("Updating one person!");
 
-        var entity = repository.findById(person.getId())
+        var entity = repository.findById(personVO.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
-        entity.setFirstName(person.getFirstName());
-        entity.setLastName(person.getLastName());
-        entity.setAddress(person.getAddress());
-        entity.setGender(person.getGender());
+        entity.setFirstName(personVO.getFirstName());
+        entity.setLastName(personVO.getLastName());
+        entity.setAddress(personVO.getAddress());
+        entity.setGender(personVO.getGender());
 
-        return repository.save(person);
+        return repository.save(personVO);
     }
 
     public void delete(Long id) {
