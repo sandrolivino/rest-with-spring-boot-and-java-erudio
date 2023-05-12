@@ -37,13 +37,10 @@ public class PersonServices {
     }
 
     public PersonVO create(PersonVO personVO) {
-
         logger.info("Creating one person!");
 
         var entity = DozerMapper.parseObject(personVO, Person.class);
-
         var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
-
         return vo;
     }
 

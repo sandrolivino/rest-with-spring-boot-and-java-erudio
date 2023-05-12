@@ -15,3 +15,7 @@ Dependência Maven
 
 [] Dever de casa: dar uma lida no blog https://www.baeldung.com/dozer (guia de como usar o Dozer com java)
 [] Implementar a Classe de mapeamento DozerMapper com o Dozer no pacote mapper (criar esse pacote antes)
+[] Implementar os testes do DozerMaper que criamos para verificar a correta transformação de VO em Entity e de Entity em VO.
+- Alternativas ao Dozer: MapStruct, ModelMapper, Orika (boa opção), Selma, BeanMapper
+Exemplo de uso do Orika aqui: https://hpratap.medium.com/map-two-class-object-using-orika-with-with-custom-attributes-and-auto-increment-id-value-2a0331a96bc6
+
