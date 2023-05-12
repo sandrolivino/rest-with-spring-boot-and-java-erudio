@@ -1,3 +1,5 @@
+Não queremos mostrar o nosso model no controller, para corrigir isso, vamos usar DTO - Data Transfer Object / VO - Value Object
+
 [] Criar o pacote data.vo.v1
 [] Copiar a classe Person (renomear para PersonVO) para o pacote criado e retirar todas as anotações
 [] Ajustar o controller para receber PersonVO ao invés de Person
