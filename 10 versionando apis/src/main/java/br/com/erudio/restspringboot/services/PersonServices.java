@@ -1,8 +1,10 @@
 package br.com.erudio.restspringboot.services;
 
 import br.com.erudio.restspringboot.data.vo.v1.PersonVO;
+import br.com.erudio.restspringboot.data.vo.v2.PersonVOV2;
 import br.com.erudio.restspringboot.exceptions.ResourceNotFoundException;
 import br.com.erudio.restspringboot.mapper.DozerMapper;
+import br.com.erudio.restspringboot.mapper.custom.PersonMapper;
 import br.com.erudio.restspringboot.model.Person;
 import br.com.erudio.restspringboot.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class PersonServices {
 
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonMapper personMapper;
 
     public List<PersonVO> findAll(){
         logger.info("Finding all people...");
@@ -44,6 +49,14 @@ public class PersonServices {
         return vo;
     }
 
+    public PersonVOV2 createV2(PersonVOV2 person) {
+
+        logger.info("Creating one person with V2!");
+        var entity = personMapper.convertVoTOEntity(person);
+        var vo =  personMapper.convertEntityToVo(repository.save(entity));
+        return vo;
+    }
+
     public PersonVO update(PersonVO personVO) {
 
         logger.info("Updating one person!");
@@ -68,4 +81,5 @@ public class PersonServices {
 
         repository.delete(entity);
     }
+
 }
