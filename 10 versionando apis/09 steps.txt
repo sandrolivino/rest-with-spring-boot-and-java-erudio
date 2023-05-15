@@ -1,0 +1,21 @@
+Não queremos mostrar o nosso model no controller, para corrigir isso, vamos usar DTO - Data Transfer Object / VO - Value Object
+
+[] Criar o pacote data.vo.v1
+[] Copiar a classe Person (renomear para PersonVO) para o pacote criado e retirar todas as anotações
+[] Ajustar o controller para receber PersonVO ao invés de Person
+[] Ajustar o service para receber PersonVO ao invés de Person
+[] Instalar o Dozer para mapeamento de VO para Entity
+Dependência Maven
+
+<dependency>
+    <groupId>com.github.dozermapper</groupId>
+	<artifactId>dozer-core</artifactId>
+	<version>${dozer.version}</version>
+</dependency>
+
+[] Dever de casa: dar uma lida no blog https://www.baeldung.com/dozer (guia de como usar o Dozer com java)
+[] Implementar a Classe de mapeamento DozerMapper com o Dozer no pacote mapper (criar esse pacote antes)
+[] Implementar os testes do DozerMaper que criamos para verificar a correta transformação de VO em Entity e de Entity em VO.
+- Alternativas ao Dozer: MapStruct, ModelMapper, Orika (boa opção), Selma, BeanMapper
+Exemplo de uso do Orika aqui: https://hpratap.medium.com/map-two-class-object-using-orika-with-with-custom-attributes-and-auto-increment-id-value-2a0331a96bc6
+
