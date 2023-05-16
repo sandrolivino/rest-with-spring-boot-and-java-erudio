@@ -33,3 +33,16 @@ public PersonVOV2 createV2(PersonVOV2 personVOV2) {
 [] Utilizar o mapper customizado no service
 [] Testar a nova versão no Postman
 
+Coisas do capítulo 12
+[] Mudar a ordem do retorno JSON do VO
+- @JsonPropertyOrder({"id", "firstName", "lastName", "address", "gender"})
+
+[] Mudar o nome da propriedade que será gerada pelo JSON
+- @JsonProperty(value = "first_name")
+
+[] Omitir a serialização de uma propriedade
+- @JsonIgnore
+
+
+
+
