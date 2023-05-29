@@ -40,6 +40,8 @@ public class WebConfig implements WebMvcConfigurer {
 
 [] Implementar as propriedades do método configureContentNegotiation
 ```
+        // Via QUERY PARAM
+        // Ex: http..../person/v1?mediaType=xml
         configurer.favorParameter(true)
                 .parameterName("mediaType")
                 .ignoreAcceptHeader(true)
@@ -49,3 +51,25 @@ public class WebConfig implements WebMvcConfigurer {
                 .mediaType("xml", MediaType.APPLICATION_XML);
 
 ```
+
+[] Implementar o content negociation via HEADER PARAM
+```
+        // Via HEADER PARAM
+        // Ex: http..../person/v1
+        configurer.favorParameter(false)
+                .ignoreAcceptHeader(false)
+                .useRegisteredExtensionsOnly(false)
+                .defaultContentType(MediaType.APPLICATION_JSON)
+                .mediaType("json", MediaType.APPLICATION_JSON)
+                .mediaType("xml", MediaType.APPLICATION_XML);
+```
+
+[] Implementar o content negociation de arquivos YAML / YML
+- Incluir a dependência do Data Format para YAML:
+```
+        <dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+		</dependency>
+```
+[] Criar um conversor: YamlJacksonToHttpConverter
