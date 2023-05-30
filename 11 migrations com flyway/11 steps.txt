@@ -1,0 +1,70 @@
+## Migrations
+Consiste basicamente na criação de scripts de banco de dados que contemplam as diversas evoluções
+dos recursos do sistema.
+* Referência: https://www.martinfowler.com/articles/evodb.html
+
+[] Configurar as dependências
+```
+        <dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+		</dependency>
+```
+
+[] Criar os diretórios
+-- db
+-- migration (dentro de db)
+
+[] Acessar a ferramenta de gestão do SGBD e gerar o script de criação do banco e das tabelas.
+
+[] Criar um arquivo para copiar o schema para ele
+- V1__Create_Table_Person.sql
+
+[] Criar um arquivo para gravar o seed dos dados da tabela
+- V2__Seed_Person_Table.sql
+
+[] Alterar o properties para o jpa NÃO criar automaticamente o banco
+```
+  jpa:
+    hibernate.ddl-auto: none
+```
+
+Executar o programa e ver a criação das tabelas.
+
+[] É possível executar as migrations por linha de comando:
+- Executar um terminal da raiz do projeto e:
+- mvn clean package spring-boot:run -DskipTests
+Observação: não é uma boa prática pular os testes. Exceto nesse caso, onde só queremos recriar o banco.
+
+[] Também é possível fazer as migrations sem o uso do
+Para isso é preciso criar um plugin no pom.xml
+```
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<configuration>
+					<url>jdbc:postgresql://localhost:5433/rest_with_spring_boot_erudio</url>
+					<user>postgres</user>
+					<password>123456</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.version}</version>
+						<exclusions>
+							<exclusion>
+								<artifactId>slf4j-api</artifactId>
+								<groupId>org.slf4j</groupId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
+			</plugin>
+```
+
+[] {NO DIRETÓRIO DO POM.XML} Executar o comando:  mvn flyway:migrate
