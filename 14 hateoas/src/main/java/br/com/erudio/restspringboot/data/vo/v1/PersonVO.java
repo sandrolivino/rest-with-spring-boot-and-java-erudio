@@ -12,6 +12,7 @@ import java.util.Objects;
 public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
     // Alterado de id para key, pois o RepresentionModel já possui um id
     @Mapping("id")
+    @JsonProperty("id")
     private Long key;
 
     @JsonProperty(value = "first_name")

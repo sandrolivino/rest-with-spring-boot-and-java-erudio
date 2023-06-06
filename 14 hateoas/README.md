@@ -100,3 +100,39 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
         vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
         return vo;
 ```
+
+#### Implementar hateoas nos demais serviços: create, update, delete etc.
+```
+    // create
+    public PersonVO createV1(PersonVO personVO) {
+        logger.info("Creating one person!");
+
+        var entity = DozerMapper.parseObject(personVO, Person.class);
+        var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+        // Alterar de id para vo.getKey()
+        vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+        return vo;
+    }
+    
+    // update... (mesma alteração)
+    vo.add(linkTo(methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
+    
+    // findAll...
+    public List<PersonVO> findAll(){
+        logger.info("Finding all people...");
+
+        var persons = DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);
+        // Adicionar link hateoas para cada person da lista persons
+        persons.stream().forEach(person -> person.add(linkTo(methodOn(PersonController.class).findById(person.getKey())).withSelfRel()));
+        return persons;
+    }
+    
+    // Ajustar também o VO para retornar id e não key
+    @JsonPropertyOrder({"id", "first_name", "last_name", "address", "gender"})
+    public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
+        // Inserir a anotation @JsonProperty("id")
+        @Mapping("id")
+        @JsonProperty("id")
+        private Long key;
+    
+```
