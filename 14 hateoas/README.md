@@ -136,3 +136,5 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
         private Long key;
     
 ```
+* O método delete não precisa de implementação HATEOAS, porque ele não tem retorno.
+* Atenção: lembrar de inserir a annotation @JsonProperty("id") para que o retorno seja de id e não de key.
