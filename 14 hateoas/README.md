@@ -138,3 +138,58 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 ```
 * O método delete não precisa de implementação HATEOAS, porque ele não tem retorno.
 * Atenção: lembrar de inserir a annotation @JsonProperty("id") para que o retorno seja de id e não de key.
+
+## Introdução ao Mockito
+É um framework de testes e spy. Seu principal objetio é simular a instância de classes e a implementação de métodos.
+* Adicionar a dependência:
+```
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+```
+
+### Implementar testes automatizados para validar a criação dos links hateoas.
+* Atenção: para gerar a classe e os métodos de teste, temos que abrir a classe que será testada, no nosso caso PersonServices, clicar com o botão direito sobre um dos métodos, escolher a opção generate >> tests.
+* Em seguida, manter a Testing Library em JUNit5 (versão jupiter), selecinar a opção setUp/@Before, marcar todos os métodos que serão testados e clicar em [OK]
+![img.png](img.png)
+
+* Mover a classe criada para o pacote unittests.mockito.services
+
+### Implementação do primeiro teste unitário: findById
+```
+    @Test
+    void findById() {
+        // Já iniciamos o mock com número 1
+        Person person = input.mockEntity(1);
+
+        // Temos que setar um id, pois o mock não tem
+        person.setId(1L);
+
+        // Adicionar o: import static org.mockito.Mockito.when;
+        // Criar um mock para quando o repository for chamado, retornar um mock
+        // Para isso, mockar o repository nessa classe:
+        // @Mock
+        // PersonRepository repository;
+        when(repository.findById(1L)).thenReturn(Optional.of(person));
+        // Observar que o resultado aqui será o "person" que nós mockamos aqui nesse método findById
+
+        var result = services.findById(1L);
+
+        // Verificações
+
+        assertNotNull(result);
+        assertNotNull(result.getKey());
+        assertNotNull(result.getLinks());
+        // Usar o System.out para mostrar o resultado. Copiar e colar no assertTrue
+        // System.out.println(result.toString());
+        assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
+        // Recuperar esses valores de MockPerson.java
+        assertEquals("Addres Test1", result.getAddress());
+        assertEquals("First Name Test1", result.getFirstName());
+        assertEquals("Last Name Test1", result.getLastName());
+        // Female, pois o id 1 é impar
+        assertEquals("Female", result.getGender());
+    }
+```
